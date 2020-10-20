@@ -1,0 +1,2 @@
+id;username;nombre;apellido;email;enabled;attempts;ACCOUNT_NON_LOCKED;ACCOUNT_NON_EXPIRED;CREDENTIALS_NON_EXPIRED;password;version;client_id;created_time;created_user;updated_time;updated_user;deleted_time
+-1;genoma;GENOMA;SUPERUSUARIo;genoma@localhost.com.ar;true;0;true;true;true;$2a$04$M7M0rrJS/OO/3YFeEy1k..lQ.AbO87uQ4xKZnda8YpI.ka9tG/oya;1;0;${now};0;${now};0;null

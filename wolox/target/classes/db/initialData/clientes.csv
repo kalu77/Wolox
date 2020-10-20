@@ -1,0 +1,2 @@
+id;cuit;denominacion;version;created_time;created_user;updated_time;updated_user;deleted_time
+0;0;SYSTEM;1;${now};0;${now};0;${now}
