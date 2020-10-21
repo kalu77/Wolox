@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.google.gson.Gson;
 
 import ar.com.genomasoft.fenix.model.Persona;
+import ar.com.genomasoft.fenix.model.foto;
 import ar.com.genomasoft.fenix.model.user;
 import ar.com.genomasoft.fenix.reports.PdfGeneratorUtil;
 import ar.com.genomasoft.fenix.service.PersonaService;
@@ -45,47 +46,84 @@ import io.swagger.annotations.ApiOperation;
 @RequestMapping(path = "/api/personas")
 public class PersonaRest extends BaseClientAuditedEntityWebService<Persona, PersonaService> {
 
-
 	@GetMapping(path = "/usuarios")
 	public @ResponseBody user[] usuarios() throws Exception {
-		
-		 user[] userArray ;
-		 
-		//usamos esta url para los usuarios
+
+		user[] userArray;
+
+		// usamos esta url para los usuarios
 		URL url = new URL("https://jsonplaceholder.typicode.com/users");
 
-		//abrimos la conexion
+		// abrimos la conexion
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 		conn.setRequestMethod("GET");
 		conn.connect();
 
-		//Getting the response code, nos asuguramos que nos devuelva 200 (OK)
+		// Getting the response code, nos asuguramos que nos devuelva 200 (OK)
 		int responsecode = conn.getResponseCode();
-		
-				
-				if (responsecode != 200) {
-				    throw new RuntimeException("HttpResponseCode: " + responsecode);
-				} else {
-				  
-				    String json = "";//aca va a estar el Gson
-				    Scanner scanner = new Scanner(url.openStream());
-				  
-				   //Write all the JSON data into a string using a scanner
-				    while (scanner.hasNext()) {
-				       json += scanner.nextLine();
-				    }
-				    
-				    //Close the scanner
-				    scanner.close();
 
-				    Gson gson = new Gson(); 
-				    //convierte el Gson, en array de user. user es un clase.
-				     userArray = gson.fromJson(json, user[].class);  
-				   
-				}
+		if (responsecode != 200) {
+			throw new RuntimeException("HttpResponseCode: " + responsecode);
+		} else {
 
-				return  userArray; 
+			String json = "";// aca va a estar el Gson
+			Scanner scanner = new Scanner(url.openStream());
+
+			// Write all the JSON data into a string using a scanner
+			while (scanner.hasNext()) {
+				json += scanner.nextLine();
+			}
+
+			// Close the scanner
+			scanner.close();
+
+			Gson gson = new Gson();
+			// convierte el Gson, en array de user. user es un clase.
+			userArray = gson.fromJson(json, user[].class);
+
+		}
+
+		return userArray;
 	}
 
+	@GetMapping(path = "/fotos")
+	public @ResponseBody foto[] fotos() throws Exception {
 
+		foto[] fotosArray;
+
+		// usamos esta url para las fotos
+		URL url = new URL("https://jsonplaceholder.typicode.com/photos");
+
+		// abrimos la conexion
+		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+		conn.setRequestMethod("GET");
+		conn.connect();
+
+		// Getting the response code, nos asuguramos que nos devuelva 200 (OK)
+		int responsecode = conn.getResponseCode();
+
+		if (responsecode != 200) {
+			throw new RuntimeException("HttpResponseCode: " + responsecode);
+		} else {
+
+			String json = "";// aca va a estar el Gson
+			Scanner scanner = new Scanner(url.openStream());
+
+			// Write all the JSON data into a string using a scanner
+			while (scanner.hasNext()) {
+				json += scanner.nextLine();
+			}
+
+			// Close the scanner
+			scanner.close();
+
+			Gson gson = new Gson();
+			// convierte el Gson, en array de fotos. fotos es un clase.
+			fotosArray = gson.fromJson(json, foto[].class);
+
+		}
+
+		return fotosArray;
+	}
+	
 }
