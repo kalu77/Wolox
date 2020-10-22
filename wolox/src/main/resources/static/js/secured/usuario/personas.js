@@ -20,7 +20,7 @@ $.ajax({
 		
 		listaUsuarios.forEach(function(user){
 			var id =user.id;
-			var valor= user.name + " - " +user.username ;
+			var valor= user.name + " - " +user.username + "-" + id ;
 			modalWaitHide();
 						
 			$("#select_usuarios").append('<option value="'+id+'">'+ valor+'</option>');
@@ -55,6 +55,79 @@ function verFotos(){
 				modalWaitHide();
 							
 				$("#select_fotos").append('<option value="'+id+'">'+ valor+'</option>');
+			
+				
+			  
+			});
+			
+				
+		})
+		.fail(function(data){
+			modalError("La operación no pudo realizarse correctamente.", data)
+		});
+
+
+	}
+
+function verAlbum(){
+
+
+	
+	
+	
+	$.ajax({
+		    type: "GET", 
+		    url: _path + "api/personas/album/" ,
+			beforeSend: function(xhr){
+				xhr.setRequestHeader('X-CSRF-TOKEN', _csrf );
+				modalWaitShow();
+			}
+		}).done(function(listaAlbumes){
+			
+			listaAlbumes.forEach(function(album){
+				var id =album.id;
+				var valor= album.title + " - " +album.userId ;
+				modalWaitHide();
+							
+				$("#select_album").append('<option value="'+id+'">'+ valor+'</option>');
+			    
+				
+			  
+			});
+			
+				
+		})
+		.fail(function(data){
+			modalError("La operación no pudo realizarse correctamente.", data)
+		});
+
+
+	}
+
+
+function verAlbumporUsuario(){
+
+	
+	$("#select_Albumes_usuarios").empty();
+	$('#select_Albumes_usuarios option').remove();
+	
+	var idUsuario= $('#select_usuarios option:selected').attr('value');
+	
+	$.ajax({
+		    type: "GET", 
+		    url: _path + "api/personas/albumUsuario/" +  idUsuario,
+			beforeSend: function(xhr){
+				xhr.setRequestHeader('X-CSRF-TOKEN', _csrf );
+				modalWaitShow();
+			}
+		}).done(function(listaAlbumes){
+			
+			listaAlbumes.forEach(function(album){
+				var id =album.id;
+				var valor= album.title + " - " +album.userId ;
+				modalWaitHide();
+							
+				$("#select_Albumes_usuarios").append('<option value="'+id+'">'+ valor+'</option>');
 			
 				
 			  

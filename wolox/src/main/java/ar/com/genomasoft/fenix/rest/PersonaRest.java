@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.google.gson.Gson;
 
 import ar.com.genomasoft.fenix.model.Persona;
+import ar.com.genomasoft.fenix.model.album;
 import ar.com.genomasoft.fenix.model.foto;
 import ar.com.genomasoft.fenix.model.user;
 import ar.com.genomasoft.fenix.reports.PdfGeneratorUtil;
@@ -124,6 +125,199 @@ public class PersonaRest extends BaseClientAuditedEntityWebService<Persona, Pers
 		}
 
 		return fotosArray;
+	}
+
+	@GetMapping(path = "/album")
+	public @ResponseBody album[] albumes() throws Exception {
+
+		album[] albumArray;
+
+		// usamos esta url para las fotos
+		URL url = new URL("https://jsonplaceholder.typicode.com/albums");
+
+		// abrimos la conexion
+		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+		conn.setRequestMethod("GET");
+		conn.connect();
+
+		// Getting the response code, nos asuguramos que nos devuelva 200 (OK)
+		int responsecode = conn.getResponseCode();
+
+		if (responsecode != 200) {
+			throw new RuntimeException("HttpResponseCode: " + responsecode);
+		} else {
+
+			String json = "";// aca va a estar el Gson
+			Scanner scanner = new Scanner(url.openStream());
+
+			// Write all the JSON data into a string using a scanner
+			while (scanner.hasNext()) {
+				json += scanner.nextLine();
+			}
+
+			// Close the scanner
+			scanner.close();
+
+			Gson gson = new Gson();
+			// convierte el Gson, en array de albumes. album es una clase.
+			albumArray = gson.fromJson(json, album[].class);
+
+		}
+
+		return albumArray;
+	}
+	
+	@GetMapping(path = "/albumUsuario/{idUsuario}")
+	public @ResponseBody album[] albumesForUsers(@PathVariable("idUsuario") String IDUsuario) throws Exception {
+
+		album[] albumArray;
+
+		// usamos esta url para las fotos
+		URL url = new URL("https://jsonplaceholder.typicode.com/albums?userId="+ IDUsuario);
+
+		// abrimos la conexion
+		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+		conn.setRequestMethod("GET");
+		conn.connect();
+
+		// Getting the response code, nos asuguramos que nos devuelva 200 (OK)
+		int responsecode = conn.getResponseCode();
+
+		if (responsecode != 200) {
+			throw new RuntimeException("HttpResponseCode: " + responsecode);
+		} else {
+
+			String json = "";// aca va a estar el Gson
+			Scanner scanner = new Scanner(url.openStream());
+
+			// Write all the JSON data into a string using a scanner
+			while (scanner.hasNext()) {
+				json += scanner.nextLine();
+			}
+
+			// Close the scanner
+			scanner.close();
+
+			Gson gson = new Gson();
+			// convierte el Gson, en array de albumes. album es una clase.
+			albumArray = gson.fromJson(json, album[].class);
+			
+			
+
+		}
+
+		return albumArray;
+	}
+
+	
+	
+	@GetMapping(path = "/photoForUsers/{idUsuario}")
+	public @ResponseBody album[] photoForUsers(@PathVariable("idUsuario") String IDUsuario) throws Exception {
+
+		album[] albumArray;
+
+		// usamos esta url para las fotos
+		URL url = new URL("https://jsonplaceholder.typicode.com/albums?userId="+ IDUsuario);
+
+		// abrimos la conexion
+		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+		conn.setRequestMethod("GET");
+		conn.connect();
+
+		// Getting the response code, nos asuguramos que nos devuelva 200 (OK)
+		int responsecode = conn.getResponseCode();
+
+		if (responsecode != 200) {
+			throw new RuntimeException("HttpResponseCode: " + responsecode);
+		} else {
+
+			String json = "";// aca va a estar el Gson
+			Scanner scanner = new Scanner(url.openStream());
+
+			// Write all the JSON data into a string using a scanner
+			while (scanner.hasNext()) {
+				json += scanner.nextLine();
+			}
+
+			// Close the scanner
+			scanner.close();
+
+			Gson gson = new Gson();
+			// convierte el Gson, en array de albumes. album es una clase.
+			albumArray = gson.fromJson(json, album[].class);
+			
+			foto[] fotoArray=	obtenerFotos(albumArray);
+			
+
+		}
+
+		return albumArray;
+	}
+
+	private foto[] obtenerFotos(album[] albumArray) throws Exception {
+		
+		foto[] ftArray;
+		
+		ArrayList<Integer> IdAlbunes= new ArrayList<Integer>();
+		
+		for (int i = 0; i < albumArray.length; i++){
+		    
+			Integer idAlbum=albumArray[i].getId();
+			IdAlbunes.add(idAlbum);
+			
+		}
+		
+		String sUrl="https://jsonplaceholder.typicode.com/photos";
+		int vuelta=0;
+		for (Integer idAlbunes : IdAlbunes) {
+			
+			if(vuelta==0) {
+				sUrl=sUrl+"?albumId="+ String.valueOf(idAlbunes);
+			}else {
+				sUrl=sUrl+"&albumId="+ String.valueOf(idAlbunes);
+			}
+			
+			vuelta++;
+		}
+
+		
+		// usamos esta url para las fotos
+				URL url = new URL(sUrl);
+
+				// abrimos la conexion
+				HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+				conn.setRequestMethod("GET");
+				conn.connect();
+
+				// Getting the response code, nos asuguramos que nos devuelva 200 (OK)
+				int responsecode = conn.getResponseCode();
+
+				if (responsecode != 200) {
+					throw new RuntimeException("HttpResponseCode: " + responsecode);
+				} else {
+
+					String json = "";// aca va a estar el Gson
+					Scanner scanner = new Scanner(url.openStream());
+
+					// Write all the JSON data into a string using a scanner
+					while (scanner.hasNext()) {
+						json += scanner.nextLine();
+					}
+
+					// Close the scanner
+					scanner.close();
+
+					Gson gson = new Gson();
+					// convierte el Gson, en array de albumes. album es una clase.
+					ftArray = gson.fromJson(json, foto[].class);
+					
+		
+		
+	}
+
+				return ftArray;
+
+	
 	}
 	
 }
