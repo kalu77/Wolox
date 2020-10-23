@@ -6,23 +6,38 @@
 
 
 <th:block layout:fragment="content-head">
-                <link rel="stylesheet" th:href="@{/webjars/datatables/css/jquery.dataTables.min.css}"></link>
-                <link rel="stylesheet" th:href="@{/webjars/datatables/css/dataTables.bootstrap.min.css}"></link>
+	<link rel="stylesheet"
+		th:href="@{/webjars/datatables/css/jquery.dataTables.min.css}"></link>
+	<link rel="stylesheet"
+		th:href="@{/webjars/datatables/css/dataTables.bootstrap.min.css}"></link>
 </th:block>
 
 
 <th:block layout:fragment="content-header">
-	 <section class="content-header">
-	   <h3>
-	     Administrar Personas2
-	   </h3>
-	   <ol class="breadcrumb">  <li><a th:href="@{/index}" ><i class="fa fa-home"></i> Inicio</a></li>
-	     <li><a th:href="@{/genoma/personas}" class="active"><i class="fa fa-plus-square"></i> Personas</a></li>      
-	   </ol>
-	 </section>
-	 
-	 <button onClick="verUsuarios()">Ver Usuario</button>
-	  <select id = "select_usuarios"></select>
+	<section class="content-header">
+		<h3>Administrar Personas2</h3>
+		<ol class="breadcrumb">
+			<li><a th:href="@{/index}"><i class="fa fa-home"></i>
+					Inicio</a></li>
+			<li><a th:href="@{/genoma/personas}" class="active"><i
+					class="fa fa-plus-square"></i> Personas</a></li>
+		</ol>
+	</section>
+
+	<button onClick="verUsuarios()">Ver Usuario</button>
+	<select id="select_usuarios"></select>
+	<button onClick="verAlbumporUsuario()">Ver album por Usuario</button>
+	<select id="select_Albumes_usuarios"></select>
+	<button onClick="verFotosporUsuario()">Ver fotos por usuario</button>
+	<select id="select_fotos_usuarios"></select>
+	<br></br>
+	<br></br>
+	<button onClick="verAlbum()">Ver album</button>
+	<select id="select_album"></select>
+	<br></br>
+	<br></br>
+	<button onClick="verFotos()">Ver fotos</button>
+	<select id="select_fotos"></select>
 </th:block>
 
 
@@ -32,7 +47,7 @@
 	<script th:src="@{/webjars/bootstrap-validator/dist/validator.min.js}"></script>
 	<script th:src="@{/webjars/datatables/js/jquery.dataTables.min.js}"></script>
 	<script th:src="@{/webjars/datatables/js/dataTables.bootstrap.min.js}"></script>
-	<script th:src="@{/js/secured/usuario/personas.js}"></script>	
+	<script th:src="@{/js/secured/usuario/personas.js}"></script>
 </th:block>
 
 

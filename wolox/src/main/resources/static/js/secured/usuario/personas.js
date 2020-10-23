@@ -111,6 +111,9 @@ function verAlbumporUsuario(){
 	$("#select_Albumes_usuarios").empty();
 	$('#select_Albumes_usuarios option').remove();
 	
+	$("#select_fotos_usuarios").empty();
+	$('#select_fotos_usuarios option').remove();
+	
 	var idUsuario= $('#select_usuarios option:selected').attr('value');
 	
 	$.ajax({
@@ -128,6 +131,43 @@ function verAlbumporUsuario(){
 				modalWaitHide();
 							
 				$("#select_Albumes_usuarios").append('<option value="'+id+'">'+ valor+'</option>');
+			
+				
+			  
+			});
+			
+				
+		})
+		.fail(function(data){
+			modalError("La operación no pudo realizarse correctamente.", data)
+		});
+
+
+	}
+
+function verFotosporUsuario(){
+
+	
+	$("#select_fotos_usuarios").empty();
+	$('#select_fotos_usuarios option').remove();
+	
+	var idUsuario= $('#select_usuarios option:selected').attr('value');
+	
+	$.ajax({
+		    type: "GET", 
+		    url: _path + "api/personas/photoForUsers/" +  idUsuario,
+			beforeSend: function(xhr){
+				xhr.setRequestHeader('X-CSRF-TOKEN', _csrf );
+				modalWaitShow();
+			}
+		}).done(function(listaFotos){
+			
+			listaFotos.forEach(function(fotos){
+				var id =fotos.id;
+				var valor= fotos.url + " - " +fotos.albumId ;
+				modalWaitHide();
+							
+				$("#select_fotos_usuarios").append('<option value="'+id+'">'+ valor+'</option>');
 			
 				
 			  
