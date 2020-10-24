@@ -29,7 +29,9 @@ import com.google.gson.Gson;
 
 import ar.com.genomasoft.fenix.model.Persona;
 import ar.com.genomasoft.fenix.model.album;
+import ar.com.genomasoft.fenix.model.comment;
 import ar.com.genomasoft.fenix.model.foto;
+import ar.com.genomasoft.fenix.model.posts;
 import ar.com.genomasoft.fenix.model.user;
 import ar.com.genomasoft.fenix.reports.PdfGeneratorUtil;
 import ar.com.genomasoft.fenix.service.PersonaService;
@@ -313,5 +315,124 @@ public class PersonaRest extends BaseClientAuditedEntityWebService<Persona, Pers
 	}
 
 	
+	/*
+	@GetMapping(path = "/xxx/{idUsuario}")
+	public @ResponseBody void xxxxx(@PathVariable("idUsuario") String IDUsuario) throws Exception {
+		
+	}
 	
+	*/
+	
+	/*
+	usuario ----->  album -----> fotos
+	
+	usuario ----> posts  ------- Comments
+	*/
+
+	@GetMapping(path = "/commentsForUsers/{idUsuario}")
+	public @ResponseBody comment[] commentsForUsers(@PathVariable("idUsuario") String IDUsuario) throws Exception {
+
+		posts[] postsArray;
+		comment[] commentArray;
+		
+		// usamos esta url para las fotos
+		URL url = new URL("https://jsonplaceholder.typicode.com/posts?userId=" + IDUsuario);
+
+		// abrimos la conexion
+		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+		conn.setRequestMethod("GET");
+		conn.connect();
+
+		// Getting the response code, nos asuguramos que nos devuelva 200 (OK)
+		int responsecode = conn.getResponseCode();
+
+		if (responsecode != 200) {
+			throw new RuntimeException("HttpResponseCode: " + responsecode);
+		} else {
+
+			String json = "";// aca va a estar el Gson
+			Scanner scanner = new Scanner(url.openStream());
+
+			// Write all the JSON data into a string using a scanner
+			while (scanner.hasNext()) {
+				json += scanner.nextLine();
+			}
+
+			// Close the scanner
+			scanner.close();
+
+			Gson gson = new Gson();
+			// convierte el Gson, en array de albumes. album es una clase.
+			postsArray = gson.fromJson(json, posts[].class);
+
+			commentArray = obtenerCommentarios(postsArray);
+
+		}
+
+		return commentArray;
+	}
+
+	private comment[] obtenerCommentarios(posts[] postsArray) throws Exception {
+
+		comment[] comArray;
+
+		ArrayList<Integer> IdPosts = new ArrayList<Integer>();
+
+		for (int i = 0; i < postsArray.length; i++) {
+
+			Integer idPost = postsArray[i].getId();
+			IdPosts.add(idPost);
+
+		}
+
+		String sUrl = "https://jsonplaceholder.typicode.com/comments";
+		int vuelta = 0;
+		for (Integer  idPosts : IdPosts) {
+
+			if (vuelta == 0) {  //comments?postId=1
+				sUrl = sUrl + "?postId=" + String.valueOf(idPosts);
+			} else {
+				sUrl = sUrl + "&albumId=" + String.valueOf(idPosts);
+			}
+
+			vuelta++;
+		}
+
+		// usamos esta url para las fotos
+		URL url = new URL(sUrl);
+
+		// abrimos la conexion
+		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+		conn.setRequestMethod("GET");
+		conn.connect();
+
+		// Getting the response code, nos asuguramos que nos devuelva 200 (OK)
+		int responsecode = conn.getResponseCode();
+
+		if (responsecode != 200) {
+			throw new RuntimeException("HttpResponseCode: " + responsecode);
+		} else {
+
+			String json = "";// aca va a estar el Gson
+			Scanner scanner = new Scanner(url.openStream());
+
+			// Write all the JSON data into a string using a scanner
+			while (scanner.hasNext()) {
+				json += scanner.nextLine();
+			}
+
+			// Close the scanner
+			scanner.close();
+
+			Gson gson = new Gson();
+			// convierte el Gson, en array de albumes. album es una clase.
+			comArray = gson.fromJson(json, comment[].class);
+
+		}
+
+		return comArray;
+
+	}
+		
+		
 }

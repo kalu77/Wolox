@@ -180,14 +180,14 @@ function commentsforUsers() {
 			modalWaitShow();
 		}
 	}).done(
-			function(listaFotos) {
+			function(listaComentarios) {
 
-				listaFotos.forEach(function(fotos) {
-					var id = fotos.id;
-					var valor = fotos.url + " - " + fotos.albumId;
+				listaComentarios.forEach(function(comments) {
+					var id = comments.id;
+					var valor = comments.body + " - " + comments.postId;
 					modalWaitHide();
 
-					$("#select_fotos_usuarios")
+					$("#select_comments")
 							.append(
 									'<option value="' + id + '">' + valor
 											+ '</option>');
