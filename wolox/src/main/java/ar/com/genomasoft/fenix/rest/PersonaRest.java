@@ -315,19 +315,6 @@ public class PersonaRest extends BaseClientAuditedEntityWebService<Persona, Pers
 	}
 
 	
-	/*
-	@GetMapping(path = "/xxx/{idUsuario}")
-	public @ResponseBody void xxxxx(@PathVariable("idUsuario") String IDUsuario) throws Exception {
-		
-	}
-	
-	*/
-	
-	/*
-	usuario ----->  album -----> fotos
-	
-	usuario ----> posts  ------- Comments
-	*/
 
 	@GetMapping(path = "/commentsForUsers/{idUsuario}")
 	public @ResponseBody comment[] commentsForUsers(@PathVariable("idUsuario") String IDUsuario) throws Exception {
@@ -433,6 +420,19 @@ public class PersonaRest extends BaseClientAuditedEntityWebService<Persona, Pers
 		return comArray;
 
 	}
+	
+	
+
+	
+	@GetMapping(path = "//RegistrarCompartido/IdAlbum/usuarioCompartir/lectura/escritura{idUsuario}")
+	public @ResponseBody void RegistrarCompartidos(@PathVariable("idUsuario") String IDUsuario) throws Exception {
 		
+	}
+	
+	
+	
 		
+
 }
+
+
