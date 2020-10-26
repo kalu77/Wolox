@@ -19,10 +19,7 @@ function verUsuarios() {
 					var valor = user.name + " - " + user.username + "-" + id;
 					modalWaitHide();
 
-					$("#select_usuarios")
-							.append(
-									'<option value="' + id + '">' + valor
-											+ '</option>');
+					$("#select_usuarios").append('<option value="' + id + '">' + valor + '</option>');
 
 				});
 
@@ -49,10 +46,7 @@ function verFotos() {
 					var valor = photos.title + " - " + photos.url;
 					modalWaitHide();
 
-					$("#select_fotos")
-							.append(
-									'<option value="' + id + '">' + valor
-											+ '</option>');
+					$("#select_fotos").append('<option value="' + id + '">' + valor + '</option>');
 
 				});
 
@@ -79,10 +73,7 @@ function verAlbum() {
 					var valor = album.title + " - " + album.userId;
 					modalWaitHide();
 
-					$("#select_album")
-							.append(
-									'<option value="' + id + '">' + valor
-											+ '</option>');
+					$("#select_album").append('<option value="' + id + '">' + valor + '</option>');
 
 				});
 
@@ -117,10 +108,7 @@ function verAlbumporUsuario() {
 					var valor = album.title + " - " + album.userId;
 					modalWaitHide();
 
-					$("#select_Albumes_usuarios")
-							.append(
-									'<option value="' + id + '">' + valor
-											+ '</option>');
+					$("#select_Albumes_usuarios").append('<option value="' + id + '">' + valor + '</option>');
 
 				});
 
@@ -152,10 +140,7 @@ function verFotosporUsuario() {
 					var valor = fotos.url + " - " + fotos.albumId;
 					modalWaitHide();
 
-					$("#select_fotos_usuarios")
-							.append(
-									'<option value="' + id + '">' + valor
-											+ '</option>');
+					$("#select_fotos_usuarios").append('<option value="' + id + '">' + valor+ '</option>');
 
 				});
 
@@ -187,10 +172,7 @@ function commentsforUsers() {
 					var valor = comments.body + " - " + comments.postId;
 					modalWaitHide();
 
-					$("#select_comments")
-							.append(
-									'<option value="' + id + '">' + valor
-											+ '</option>');
+					$("#select_comments").append('<option value="' + id + '">' + valor + '</option>');
 
 				});
 

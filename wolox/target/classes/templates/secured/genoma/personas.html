@@ -2,7 +2,7 @@
 
 <html lang="es" xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorator="layout" th:with="title='F�nix - Mutuales'">
+	layout:decorator="layout" th:with="title='wolox'">
 
 
 <th:block layout:fragment="content-head">
@@ -15,7 +15,7 @@
 
 <th:block layout:fragment="content-header">
 	<section class="content-header">
-		<h3>Administrar Personas2</h3>
+		<h3>Wolox</h3>
 		<ol class="breadcrumb">
 			<li><a th:href="@{/index}"><i class="fa fa-home"></i>
 					Inicio</a></li>
@@ -36,16 +36,17 @@
 	<select id="select_fotos_usuarios"></select>
 	<br></br>
 	<br></br>
+	<button onClick="commentsforUsers()">Ver comentarios por usuarios</button>
+	<select id="select_comments"></select>
+	<br></br>
+	<br></br>
 	<button onClick="verAlbum()">Ver album</button>
 	<select id="select_album"></select>
 	<br></br>
 	<br></br>
 	<button onClick="verFotos()">Ver fotos</button>
 	<select id="select_fotos"></select>
-	<br></br>
-	<br></br>
-	<button onClick="commentsforUsers()">Ver comentarios por usuarios</button>
-	<select id="select_comments"></select>
+	
 </th:block>
 
 

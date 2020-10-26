@@ -94,7 +94,7 @@ public class PersonaRest extends BaseClientAuditedEntityWebService<Persona, Pers
 
 		foto[] fotosArray;
 
-		// usamos esta url para las fotos
+		
 		URL url = new URL("https://jsonplaceholder.typicode.com/photos");
 
 		// abrimos la conexion
@@ -121,7 +121,7 @@ public class PersonaRest extends BaseClientAuditedEntityWebService<Persona, Pers
 			scanner.close();
 
 			Gson gson = new Gson();
-			// convierte el Gson, en array de fotos. fotos es un clase.
+			
 			fotosArray = gson.fromJson(json, foto[].class);
 
 		}
@@ -134,7 +134,7 @@ public class PersonaRest extends BaseClientAuditedEntityWebService<Persona, Pers
 
 		album[] albumArray;
 
-		// usamos esta url para las fotos
+		
 		URL url = new URL("https://jsonplaceholder.typicode.com/albums");
 
 		// abrimos la conexion
@@ -161,7 +161,7 @@ public class PersonaRest extends BaseClientAuditedEntityWebService<Persona, Pers
 			scanner.close();
 
 			Gson gson = new Gson();
-			// convierte el Gson, en array de albumes. album es una clase.
+			
 			albumArray = gson.fromJson(json, album[].class);
 
 		}
@@ -174,7 +174,7 @@ public class PersonaRest extends BaseClientAuditedEntityWebService<Persona, Pers
 
 		album[] albumArray;
 
-		// usamos esta url para las fotos
+		
 		URL url = new URL("https://jsonplaceholder.typicode.com/albums?userId=" + IDUsuario);
 
 		// abrimos la conexion
@@ -201,7 +201,7 @@ public class PersonaRest extends BaseClientAuditedEntityWebService<Persona, Pers
 			scanner.close();
 
 			Gson gson = new Gson();
-			// convierte el Gson, en array de albumes. album es una clase.
+			
 			albumArray = gson.fromJson(json, album[].class);
 
 		}
@@ -215,7 +215,7 @@ public class PersonaRest extends BaseClientAuditedEntityWebService<Persona, Pers
 		album[] albumArray;
 		foto[] fotoArray;
 		
-		// usamos esta url para las fotos
+		
 		URL url = new URL("https://jsonplaceholder.typicode.com/albums?userId=" + IDUsuario);
 
 		// abrimos la conexion
@@ -242,7 +242,7 @@ public class PersonaRest extends BaseClientAuditedEntityWebService<Persona, Pers
 			scanner.close();
 
 			Gson gson = new Gson();
-			// convierte el Gson, en array de albumes. album es una clase.
+			
 			albumArray = gson.fromJson(json, album[].class);
 
 			fotoArray = obtenerFotos(albumArray);
@@ -305,7 +305,7 @@ public class PersonaRest extends BaseClientAuditedEntityWebService<Persona, Pers
 			scanner.close();
 
 			Gson gson = new Gson();
-			// convierte el Gson, en array de albumes. album es una clase.
+			
 			ftArray = gson.fromJson(json, foto[].class);
 
 		}
@@ -322,7 +322,7 @@ public class PersonaRest extends BaseClientAuditedEntityWebService<Persona, Pers
 		posts[] postsArray;
 		comment[] commentArray;
 		
-		// usamos esta url para las fotos
+		
 		URL url = new URL("https://jsonplaceholder.typicode.com/posts?userId=" + IDUsuario);
 
 		// abrimos la conexion
@@ -349,7 +349,7 @@ public class PersonaRest extends BaseClientAuditedEntityWebService<Persona, Pers
 			scanner.close();
 
 			Gson gson = new Gson();
-			// convierte el Gson, en array de albumes. album es una clase.
+			
 			postsArray = gson.fromJson(json, posts[].class);
 
 			commentArray = obtenerCommentarios(postsArray);
@@ -412,7 +412,7 @@ public class PersonaRest extends BaseClientAuditedEntityWebService<Persona, Pers
 			scanner.close();
 
 			Gson gson = new Gson();
-			// convierte el Gson, en array de albumes. album es una clase.
+		
 			comArray = gson.fromJson(json, comment[].class);
 
 		}

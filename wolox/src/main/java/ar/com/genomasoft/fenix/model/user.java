@@ -1,5 +1,6 @@
 package ar.com.genomasoft.fenix.model;
 
+
 public class user {
 
 	Integer id;
