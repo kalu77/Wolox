@@ -436,7 +436,12 @@ public class PersonaRest extends BaseClientAuditedEntityWebService<Persona, Pers
 		
 	}
 		
-
+   
+	@GetMapping(path = "/FiltrarUsuario/permisoFiltrar/idAlbum{idUsuario}")
+	public @ResponseBody void filtrarUsuarios(@PathVariable("idUsuario") String IDUsuario) throws Exception {
+		
+	}
+	
 }
 
 
