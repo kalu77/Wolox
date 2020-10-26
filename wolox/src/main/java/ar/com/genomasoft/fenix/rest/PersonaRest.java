@@ -424,13 +424,17 @@ public class PersonaRest extends BaseClientAuditedEntityWebService<Persona, Pers
 	
 
 	
-	@GetMapping(path = "//RegistrarCompartido/IdAlbum/usuarioCompartir/lectura/escritura{idUsuario}")
+	@GetMapping(path = "/RegistrarCompartido/IdAlbum/usuarioCompartir/lectura/escritura{idUsuario}")
 	public @ResponseBody void RegistrarCompartidos(@PathVariable("idUsuario") String IDUsuario) throws Exception {
 		
 	}
 	
 	
 	
+	@GetMapping(path = "/CambiarPermiso/IdAlbum/usuarioCambiar/lectura/escritura{idUsuario}")
+	public @ResponseBody void cambiarPermisos(@PathVariable("idUsuario") String IDUsuario) throws Exception {
+		
+	}
 		
 
 }
